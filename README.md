@@ -1,6 +1,6 @@
 # Bambulab RFID Tag Guide
 
-This guide gives you a basic overview how you can decrypt and read your tags. Since we don't know how Bambulab will react on this guide and the general reverse engineering of the tags: **Please don't share you tag's UID and the related keys for now.**
+This guide gives you a basic overview how you can decrypt and read your tags. Since we don't know how Bambulab will react on this guide and the general reverse engineering of the tags: **Please don't share your tag's UID and the related keys for now.**
 
 We are currently working on a way to submit the tag data in a secure way so analysis on the data could be done.
 
@@ -52,7 +52,7 @@ This is a research group dedicated to documenting the data structures used by Ba
    * No, tags are digitally signed. Even if you modify the contents, the printer will reject any tags without a valid RSA signature
    * An [Open Source RFID Tag](OpenSourceRfid.md) has been proposed to allow anyone to create / modify their own tags. This must be adopted by printer manufacturers, or you can mod your own printer for support
  * **What are the next steps for this project?**
-   * Decyphering the rest of the unknwn tag content
+   * Decyphering the rest of the unknown tag content
    * Custom AMS firmware that allows custom tags to be read while ignoring the signature
    * See [Todos/Timeline/Next steps](#todostimelinenext-steps) for more info
 
@@ -62,7 +62,7 @@ Here's a high-level summary of how everything works:
    * These tags contain a unique ID that is not encrypted (called the UID)
    * In most cases UID is fixed (not-changable).  Some "hackable" rfid tags allow you to set the UID to anything you want
 * Blocks (Encrypted)
-   * MiFare tags also contain "Blocks" of data. Each block contains info about the spool, such as Material, Color, Manufacturing Date, etc. See [Tag stucture](#tag-stucture) section for details
+   * MiFare tags also contain "Blocks" of data. Each block contains info about the spool, such as Material, Color, Manufacturing Date, etc. See [Tag Documentation](#tag-documentation) section for details
    * The blocks are encrypted, meaning that you need to have a KEY to decipher them
    * Each block is encrypted with a different key
 * Encryption Keys
@@ -87,12 +87,12 @@ Here's a high-level summary of how everything works:
 
 ### How to contribute
 If you have a Proxmark3 (or other RFID debugging tool), you can sniff and decrypt the contents of your tags and submit them for review.
-The more data we have, the easier it is to compare differences to learn what each byte represents. A lot of the contents have been deciphered (see [Tag stucture](#tag-stucture)), but there is still more unknown data still left.
+The more data we have, the easier it is to compare differences to learn what each byte represents. A lot of the contents have been deciphered (see [Tag Documentation](#tag-documentation)), but there is still more unknown data still left.
 
 ## Todos/Timeline/Next steps
 
 - [ ] Tool for automatic trace analysis
-- [ ] Web service for tag submisson with automatic anonymized data publishing to github
+- [ ] Web service for tag submission with automatic anonymized data publishing to github
 - [ ] Tag content analysis
 - [ ] Generate keys based on an arbitrary UID
 
@@ -213,7 +213,7 @@ print([a.hex() for a in keys])
          - We will discover keys one at a time and save them to a dictionary file.
          - Navigate to your Proxmark3 software installation directory. This will be specific to your Operating System and Installation.
             - macOS (Intel) Example: `/usr/local/Cellar/proxmark3/4.17768/share/proxmark3/`
-            - macOS (ARM) Eample: `/opt/homebrew/Cellar/proxmark3/4.17768/share/proxmark3/`
+            - macOS (ARM) Example: `/opt/homebrew/Cellar/proxmark3/4.17768/share/proxmark3/`
             - Windows Example: TBD
             - Linux Example: TBD
          - Open a text editor and save a blank file called `myDictionary.dic` into the `dictionaries/` folder of your Proxmark3 software installation directory.
@@ -547,7 +547,7 @@ Example Data:
 
 There are tags known as "Magic Tags" which allow functionality that's not part of the classic MIFARE spec.
 One example is that most Magic Tags allow the UID to be changed, which is normally read-only on MIFARE tags.
-Magic tags are often refered to by their "generation", eg "Magic Gen 1".  Each newer generation increases the functionality, but tends to also be more expensive)
+Magic tags are often referred to by their "generation", eg "Magic Gen 1".  Each newer generation increases the functionality, but tends to also be more expensive)
 
 Gen 1 --> **Not compatible**(due to AMS checking if tag is unlockable with command 0x40)
 
